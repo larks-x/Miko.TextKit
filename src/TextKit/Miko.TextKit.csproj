@@ -7,9 +7,15 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Version>1.0.0</Version>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Title>Rich text rendering for SkiaSharp</Title>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
-
+	
+	<ItemGroup>
+		<None Include="$(RepoRootPath)README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	
 	<ItemGroup>
 	  <Compile Remove="TextEditorView.cs" />
 	</ItemGroup>
