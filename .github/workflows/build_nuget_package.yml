@@ -28,13 +28,13 @@ jobs:
         global-json-file: ./global.json
 
     - name: Restore dependencies
-      run: dotnet restore Miko.TextKit.sln
+      run: dotnet restore src/Miko.TextKit.slnx
 
     - name: Build
-      run: dotnet build Miko.TextKit.sln --configuration Release
+      run: dotnet build src/Miko.TextKit.slnx --configuration Release
 
     - name: Pack
-      run: dotnet pack Miko.TextKit.sln --configuration Release
+      run: dotnet pack src/Miko.TextKit.slnx --configuration Release
 
     - name: Publish to NuGet
       if: github.event_name == 'push'
