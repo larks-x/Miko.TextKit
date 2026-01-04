@@ -1,0 +1,43 @@
+name: Build Nuget Package
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'src/TextKit/Miko.TextKit.csproj'
+      - 'version.json'
+      - .github/workflows/build_nuget_package.yml  
+  pull_request:
+    paths:
+      - 'src/TextKit/Miko.TextKit.csproj'
+      - 'version.json'
+      - .github/workflows/build_nuget_package.yml  
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+        
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        global-json-file: ./global.json
+
+    - name: Restore dependencies
+      run: dotnet restore Miko.TextKit.slnx
+
+    - name: Build
+      run: dotnet build Miko.TextKit.slnx --configuration Release
+
+    - name: Pack
+      run: dotnet pack Miko.TextKit.slnx --configuration Release
+
+    - name: Publish to NuGet
+      if: github.event_name == 'push'
+      run: |
+        dotnet nuget push artifacts/package/release/*.nupkg -k ${{secrets.BAGETTER_KEY}} --skip-duplicate --source https://nuget.mikoui.com/v3/index.json
+        dotnet nuget push artifacts/package/release/*.snupkg -k ${{secrets.BAGETTER_KEY}} --skip-duplicate --source https://nuget.mikoui.com/v3/index.json
