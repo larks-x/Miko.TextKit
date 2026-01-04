@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="TextEditorView.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\BidiClasses.trie" />
+	  <None Remove="Resources\GraphemeClusterClasses.trie" />
+	  <None Remove="Resources\LineBreakClasses.trie" />
+	  <None Remove="Resources\WordBoundaryClasses.trie" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\BidiClasses.trie" />
+	  <EmbeddedResource Include="Resources\GraphemeClusterClasses.trie" />
+	  <EmbeddedResource Include="Resources\LineBreakClasses.trie" />
+	  <EmbeddedResource Include="Resources\WordBoundaryClasses.trie" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp" Version="3.119.0" />
+		<PackageReference Include="SkiaSharp.HarfBuzz" Version="3.119.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Nerdbank.GitVersioning" Version="3.7.115" />
+	</ItemGroup>
+</Project>
